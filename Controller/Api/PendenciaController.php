@@ -9,15 +9,51 @@ class PendenciaController extends BaseController
     {
         $params = $this->getQueryStringParams();
         
-        foreach($params as $p){
-            $arr = explode('=', $p);
-            
-            if($arr[0] === 'limit'){
-                return $arr[1];
+        if($params){
+            foreach($params as $p){
+                $arr = explode('=', $p);
+                
+                if($arr[0] === 'limit'){
+                    return $arr[1];
+                }
             }
         }
 
-        return 10;
+        return null;
+    }
+
+    public function getUsuario()
+    {
+        $params = $this->getQueryStringParams();
+        
+        if($params){
+            foreach($params as $p){
+                $arr = explode('=', $p);
+                
+                if($arr[0] === 'usuario'){
+                    return $arr[1];
+                }
+            }
+        }
+        
+        return null;
+    }
+
+    public function getSetor()
+    {
+        $params = $this->getQueryStringParams();
+        
+        if($params){
+            foreach($params as $p){
+                $arr = explode('=', $p);
+                
+                if($arr[0] === 'setor'){
+                    return $arr[1];
+                }
+            }
+        }
+        
+        return null;
     }
     
     /**
@@ -36,8 +72,10 @@ class PendenciaController extends BaseController
                 $pendenciaModel = new PendenciaModel();
 
                 $intLimit = $this->getLimit();
+                $usuario = $this->getUsuario();
+                $setor = $this->getSetor();
         
-                $arrPendencias = $pendenciaModel->getPendencias($intLimit);
+                $arrPendencias = $pendenciaModel->getPendencias($usuario, $setor, $intLimit);
                 $responseData = json_encode($arrPendencias);
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';

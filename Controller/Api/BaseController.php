@@ -29,9 +29,13 @@ class BaseController
      */
     protected function getQueryStringParams()
     {   
-        $params = explode("&", explode("?", $_SERVER['REQUEST_URI'])[1]);
-       
-        return $params;
+
+        if(strpos($_SERVER['REQUEST_URI'], "?")){
+            return explode("&", explode("?", $_SERVER['REQUEST_URI'])[1]);
+        }else{
+            return null;
+        }
+
     }
 
     /**
