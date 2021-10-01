@@ -10,4 +10,5 @@ require_once PROJECT_ROOT_PATH . "/Controller/Api/BaseController.php";
 // include the Pendencia model file
 require_once PROJECT_ROOT_PATH . "/Model/PendenciaModel.php";
 require_once PROJECT_ROOT_PATH . "/Model/UserModel.php";
+require_once PROJECT_ROOT_PATH . "/Model/SetorModel.php";
 ?>
