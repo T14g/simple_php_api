@@ -27,4 +27,13 @@ class PendenciaModel extends Database
         return $this->select($query);
 
     }
+
+    public function updatePendencia($id, $responsavel, $prazo, $pendencia)
+    {
+        $query = "UPDATE itens_ata a set a.responsavel = " . $responsavel . ", 
+        a.prazo = " . $prazo . ", a.pendencia = " . $pendencia . " WHERE a.iditens = " .$id. "";
+
+        return $this->executeStatement($query);
+        
+    }
 }

@@ -55,6 +55,25 @@ class PendenciaController extends BaseController
         
         return null;
     }
+
+    public function getPostData()
+    {
+        $data = file_get_contents('php://input');
+        $data = json_decode($data, true);
+        return $data;
+    }
+
+    public function updateAction(){
+
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+
+        if (strtoupper($requestMethod) == 'POST') {
+           $data = $this->getPostData();
+
+           var_dump($data);
+        }
+
+    }
     
     /**
      * "/pendencia/list" Endpoint - Get list of pendencias

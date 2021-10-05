@@ -1,5 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Headers: Content-Type'); 
 require __DIR__ . "/inc/bootstrap.php";
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -13,6 +14,7 @@ $uri = explode( '/', $uri );
 require PROJECT_ROOT_PATH . "/Controller/Api/PendenciaController.php";
 require PROJECT_ROOT_PATH . "/Controller/Api/UserController.php";
 require PROJECT_ROOT_PATH . "/Controller/Api/SetorController.php";
+require PROJECT_ROOT_PATH . "/Controller/Api/AreaController.php";
 
 if($uri[3] === 'pendencia'){
     $objFeedController = new PendenciaController();
@@ -20,6 +22,8 @@ if($uri[3] === 'pendencia'){
     $objFeedController = new UserController();
 }else if($uri[3] === 'setores'){
     $objFeedController = new SetorController();
+}else if($uri[3] === 'areas'){
+    $objFeedController = new AreaController();
 }
 
 
