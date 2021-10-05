@@ -56,6 +56,40 @@ class PendenciaController extends BaseController
         return null;
     }
 
+    public function getAreaId()
+    {
+        $params = $this->getQueryStringParams();
+        
+        if($params){
+            foreach($params as $p){
+                $arr = explode('=', $p);
+                
+                if($arr[0] === 'area'){
+                    return $arr[1];
+                }
+            }
+        }
+        
+        return null;
+    }
+
+    public function getStatus()
+    {
+        $params = $this->getQueryStringParams();
+        
+        if($params){
+            foreach($params as $p){
+                $arr = explode('=', $p);
+                
+                if($arr[0] === 'status'){
+                    return $arr[1];
+                }
+            }
+        }
+        
+        return null;
+    }
+
     public function getPostData()
     {
         $data = file_get_contents('php://input');
@@ -92,9 +126,10 @@ class PendenciaController extends BaseController
 
                 $intLimit = $this->getLimit();
                 $usuario = $this->getUsuario();
-                $setor = $this->getSetor();
+                $areaId = $this->getAreaId();
+                $status = $this->getStatus();
         
-                $arrPendencias = $pendenciaModel->getPendencias($usuario, $setor, $intLimit);
+                $arrPendencias = $pendenciaModel->getPendencias($usuario, $areaId, $status, $intLimit);
                 $responseData = json_encode($arrPendencias);
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';

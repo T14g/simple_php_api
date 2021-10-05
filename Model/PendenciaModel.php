@@ -3,22 +3,28 @@ require_once PROJECT_ROOT_PATH . "/Model/Database.php";
 
 class PendenciaModel extends Database
 {
-    public function getPendencias($usuario = null, $setor = null, $limit = null)
+    public function getPendencias($usuario = null, $areaId = null, $status = null,  $limit = null)
     {
-        $query = "SELECT * FROM itens_ata ";
+        $query = "SELECT * FROM pendencia ";
         $where = "";
 
         if($usuario){
             $where .= " WHERE responsavel = '" . $usuario . "'";
         }
 
-        if($setor && $where == ""){
-            $where .= " WHERE setoratacapa = '" . $setor . "'";
-        }else if($setor){
-            $where .= " AND setoratacapa = '" . $setor . "'";
+        if($areaId && $where == ""){
+            $where .= " WHERE id_reuniao = '" . $areaId . "'";
+        }else if($areaId){
+            $where .= " AND id_reuniao = '" . $areaId . "'";
         }
 
-        $query .= $where . " ORDER BY iditens";
+        if($status && $where == ""){
+            $where .= " WHERE `status` = '" . $status . "'";
+        }else if($status){
+            $where .= " AND `status` = '" . $status . "'";
+        }
+
+        $query .= $where . " ORDER BY id_pendencia";
 
         if($limit){
             $query .= " LIMIT " . $limit . "";

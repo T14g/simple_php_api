@@ -5,6 +5,6 @@ class AreaModel extends Database
 {
     public function getAreas()
     {
-        return $this->select("SELECT * FROM area");
+        return $this->select("SELECT * FROM reuniao");
     }
 }

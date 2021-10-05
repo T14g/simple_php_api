@@ -5,6 +5,6 @@ class UserModel extends Database
 {
     public function getUsers()
     {
-        return $this->select("SELECT * FROM emails");
+        return $this->select("SELECT * FROM responsavel");
     }
 }
