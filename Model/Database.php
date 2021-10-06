@@ -30,6 +30,24 @@ class Database
         return false;
     }
 
+    public function execute($query)
+    {
+        try {
+            $stmt = $this->connection->prepare( $query );
+
+            if($stmt === false) {
+                throw New Exception("Unable to do prepared statement: " . $query);
+            }
+
+            $stmt->execute();
+
+            return $stmt;
+
+        } catch(Exception $e) {
+            throw New Exception( $e->getMessage() );
+        }
+    }
+
     private function executeStatement($query = "" , $params = [])
     {
         try {

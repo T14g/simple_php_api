@@ -90,12 +90,6 @@ class PendenciaController extends BaseController
         return null;
     }
 
-    public function getPostData()
-    {
-        $data = file_get_contents('php://input');
-        $data = json_decode($data, true);
-        return $data;
-    }
 
     public function updateAction(){
 

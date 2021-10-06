@@ -39,6 +39,19 @@ class BaseController
     }
 
     /**
+     * Get POST data
+     * 
+     * @return array
+     */
+
+    public function getPostData()
+    {
+        $data = file_get_contents('php://input');
+        $data = json_decode($data, true);
+        return $data;
+    }
+
+    /**
      * Send API output.
      *
      * @param mixed  $data
