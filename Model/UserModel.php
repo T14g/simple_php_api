@@ -7,4 +7,11 @@ class UserModel extends Database
     {
         return $this->select("SELECT * FROM responsavel");
     }
+
+    public function loginUser($user, $senha)
+    {
+        $query = "SELECT nome, nivel_acesso FROM usuario WHERE nome = '" .$user. "' AND senha = '" .$senha. "'";
+        return $this->select($query);
+    }
+   
 }
