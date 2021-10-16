@@ -10,7 +10,7 @@ class UserModel extends Database
 
     public function loginUser($user, $senha)
     {
-        $query = "SELECT nome, nivel_acesso FROM usuario WHERE nome = '" .$user. "' AND senha = '" .$senha. "'";
+        $query = "SELECT nome, nivel_acesso, id_usuario FROM usuario WHERE nome = '" .$user. "' AND senha = '" .$senha. "'";
         return $this->select($query);
     }
    
