@@ -17,11 +17,9 @@ class ComentarioModel extends Database
 
     public function createComentario($idUsuario, $idPendencia, $date, $nome, $comentario)
     {
-        
         $query = "INSERT INTO comentario (id_usuario, id_pendencia, `data`, nome_usuario, comentario)
         VALUES(" . $idUsuario . ", " . $idPendencia . ", '" . $date ."', '" . $nome . "', '" . $comentario ."')";
 
         return $this->execute($query);
-
     }
 }

@@ -41,7 +41,11 @@ class Database
 
             $stmt->execute();
 
-            return $stmt;
+            if($stmt){
+                return true;
+            }else{
+                return false;
+            }
 
         } catch(Exception $e) {
             throw New Exception( $e->getMessage() );

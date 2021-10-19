@@ -31,7 +31,6 @@ class PendenciaModel extends Database
         }
 
         return $this->select($query);
-
     }
 
     public function updatePendencia($id, $responsavel, $prazo, $pendencia)
@@ -40,6 +39,19 @@ class PendenciaModel extends Database
         a.prazo = " . $prazo . ", a.pendencia = " . $pendencia . " WHERE a.iditens = " .$id. "";
 
         return $this->executeStatement($query);
-        
+    }
+
+    public function pendenciaOK($id)
+    {
+        $query = "UPDATE pendencia SET `status` = 'OK' WHERE id_pendencia = '" .$id. "'";
+        return $this->execute($query);
+    }
+
+    public function createJustificativa($idResponsavel, $responsavel, $idPendencia, $justificativa, $data)
+    {
+        $query = "INSERT INTO justificativa (id_responsavel, responsavel, id_pendencia, justificativa, data_justificativa)
+        VALUES(" . $idResponsavel . ", '" . $responsavel . "', " . $idPendencia .", '" . $justificativa . "', '" . $data ."')";
+
+        return $this->execute($query);
     }
 }

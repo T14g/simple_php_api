@@ -102,6 +102,35 @@ class PendenciaController extends BaseController
         }
 
     }
+
+    public function closeAction(){
+
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+
+        if (strtoupper($requestMethod) == 'POST') {
+
+            try {
+                $pendenciaModel = new PendenciaModel();
+
+                $data = $this->getPostData();
+                $date = $data['data'];
+                $idPendencia = $data['id_pendencia'];
+                $idUsuario = $data['id_usuario'];
+                $responsavel = $data['responsavel'];
+                $justificativa = $data['justificativa'];
+        
+                $resultUpdate = $pendenciaModel->pendenciaOK($idPendencia);
+                
+                if($resultUpdate){
+                    $resultJustify = $pendenciaModel->createJustificativa($idUsuario, $responsavel, $idPendencia, $justificativa, $date);
+                }
+            } catch (Error $e) {
+                $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        }
+
+    }
     
     /**
      * "/pendencia/list" Endpoint - Get list of pendencias
