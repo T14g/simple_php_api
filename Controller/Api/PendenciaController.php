@@ -90,6 +90,22 @@ class PendenciaController extends BaseController
         return null;
     }
 
+    public function getPendenciaId()
+    {
+        $params = $this->getQueryStringParams();
+        
+        if($params){
+            foreach($params as $p){
+                $arr = explode('=', $p);
+                
+                if($arr[0] === 'id'){
+                    return $arr[1];
+                }
+            }
+        }
+        
+        return null;
+    }
 
     public function updateAction(){
 
@@ -154,6 +170,41 @@ class PendenciaController extends BaseController
         
                 $arrPendencias = $pendenciaModel->getPendencias($usuario, $areaId, $status, $intLimit);
                 $responseData = json_encode($arrPendencias);
+            } catch (Error $e) {
+                $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        } else {
+            $strErrorDesc = 'Method not supported';
+            $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+
+        // send output
+        if (!$strErrorDesc) {
+            $this->sendOutput(
+                $responseData,
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $this->sendOutput(json_encode(array('error' => $strErrorDesc)), 
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
+
+    public function justificativaAction()
+    {
+        $strErrorDesc = '';
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+
+
+        if (strtoupper($requestMethod) == 'GET') {
+            try {
+                $pendenciaModel = new PendenciaModel();
+                $idPendencia = $this->getPendenciaId();
+                $result = $pendenciaModel->getJustificativa($idPendencia);
+
+                $responseData = json_encode($result);
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';

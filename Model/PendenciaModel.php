@@ -54,4 +54,16 @@ class PendenciaModel extends Database
 
         return $this->execute($query);
     }
+
+    public function getJustificativa($idPendencia = null)
+    {
+
+        if($idPendencia){
+            $query = "SELECT * FROM justificativa WHERE id_pendencia = " . $idPendencia . "";
+            return $this->select($query);
+        }else{
+            return [];
+        }
+
+    }
 }
