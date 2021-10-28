@@ -5,6 +5,6 @@ class SetorModel extends Database
 {
     public function getSetores()
     {
-        return $this->select("SELECT * FROM setores");
+        return $this->select("SELECT * FROM setor");
     }
 }
