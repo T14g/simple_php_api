@@ -16,6 +16,7 @@ require PROJECT_ROOT_PATH . "/Controller/Api/UserController.php";
 require PROJECT_ROOT_PATH . "/Controller/Api/SetorController.php";
 require PROJECT_ROOT_PATH . "/Controller/Api/AreaController.php";
 require PROJECT_ROOT_PATH . "/Controller/Api/ComentarioController.php";
+require PROJECT_ROOT_PATH . "/Controller/Api/AtaController.php";
 
 if($uri[3] === 'pendencia'){
     $objFeedController = new PendenciaController();
@@ -27,6 +28,8 @@ if($uri[3] === 'pendencia'){
     $objFeedController = new AreaController();
 }else if($uri[3] === 'comentarios'){
     $objFeedController = new ComentarioController();
+}else if($uri[3] === 'ata'){
+    $objFeedController = new AtaController();
 }
 
 

@@ -13,4 +13,5 @@ require_once PROJECT_ROOT_PATH . "/Model/UserModel.php";
 require_once PROJECT_ROOT_PATH . "/Model/SetorModel.php";
 require_once PROJECT_ROOT_PATH . "/Model/AreaModel.php";
 require_once PROJECT_ROOT_PATH . "/Model/ComentarioModel.php";
+require_once PROJECT_ROOT_PATH . "/Model/AtaModel.php";
 ?>
